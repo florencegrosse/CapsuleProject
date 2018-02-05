@@ -8,7 +8,7 @@ PFont montserratSemiBold;
 ScreenManager screenManager;
 PumpManager pump;
 KinectManager kinect;
-Movie test;
+//Movie test;
 
 import system.signals.Signal ;
 
@@ -17,8 +17,8 @@ void setup()
   size(800, 600);
   pixelDensity(2);
 
-  test = new Movie(this, "texture.MP4");
-  test.loop();
+  //test = new Movie(this, "texture.MP4");
+  //test.loop();
 
   montserratLight = createFont("Montserrat-Light.otf", 20);
   montserratMedium = createFont("Montserrat-Medium.otf", 20);
@@ -54,7 +54,7 @@ void movieEvent(Movie m) {
   
 void draw()
 {
-  background(255);
+  background(0);
   pump.update();
   screenManager.draw();
   pump.draw();

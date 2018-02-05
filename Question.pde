@@ -2,11 +2,13 @@ public class Question extends Screen
 {
   int id;
   String question;
+  PImage circle;
   ZoneManager zoneManager;
 
   public Question(String id, String next, KinectManager kinect, String question)
   {
     super(id, next, kinect, question);
+    circle = loadImage("cercle_couleur.png");
     zoneManager = new ZoneManager(width/2, height/2+20, 50, 200);
   }
 
@@ -18,7 +20,7 @@ public class Question extends Screen
     pushStyle();
     textFont(montserratSemiBold);
     textSize (18);
-    fill(0);
+    fill(255);
     textAlign(CENTER);
     text(super.id, width/10, 30, width/10*2, 20);
     textFont(montserratLight);
@@ -26,7 +28,8 @@ public class Question extends Screen
 
     //display background
     imageMode(CENTER);
-    image(test, width/2, height/2+20, width/5*3, width/5*3);
+    image(circle, width/2, height/2+20, width/5*3, width/5*3);
+    //image(test, width/2, height/2+20, width/5*3, width/5*3);
     //fill(color(23,87,56));
     //noStroke();
     //ellipse(width/2, height/2+20, zoneManager.hypo*2, zoneManager.hypo*2);

@@ -23,7 +23,7 @@ public class StickyHands extends Screen
 
     pushStyle();
     textSize(30);
-    fill(150, 200);
+    fill(255);
     textAlign(CENTER);
     text("Sticky Hands !", 0, height/2-20, width, 40);
     

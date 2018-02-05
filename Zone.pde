@@ -24,7 +24,7 @@ public class Zone extends Action
     //check hand pos for zone
 
     fill(zoneColor);
-    stroke(color(255));
+    stroke(color(255,255,255,200));
     strokeWeight(5);
     ellipse(origin.x, origin.y, radius*2, radius*2);
 
@@ -32,8 +32,8 @@ public class Zone extends Action
     if (isPointOver(kinect.person1Hand)) numHandsOver++;
     if (isPointOver(kinect.person2Hand)) numHandsOver++;
     targetColor = color(255, 0);;
-    if (numHandsOver == 1) targetColor = color(39,76,54);
-    else if (numHandsOver == 2) targetColor = color(67,124,87);
+    if (numHandsOver == 1) targetColor = color(255,255,255,120);
+    else if (numHandsOver == 2) targetColor = color(255,255,255,120);
 
     zoneColor = targetColor;
 

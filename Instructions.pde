@@ -23,7 +23,7 @@ public class Instruction extends Screen
     pushStyle();    
 
     textSize(18);
-    fill(0);
+    fill(255);
     textAlign(CENTER);
     textFont (montserratLight);
     text("move your hand hover the circle", 0, 30, width, 20);

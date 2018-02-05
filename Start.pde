@@ -44,7 +44,7 @@ public class Start extends Screen
     image(person1, person1Position.x, person1Position.y, personWidth, personHeight);
     image(person2, person2Position.x, person2Position.y, personWidth, personHeight);
     textSize(18);
-    fill(0);
+    fill(255);
     textAlign(CENTER);
     textFont(montserratLight);
     if (kinect.person2Here) //Both persons are here
