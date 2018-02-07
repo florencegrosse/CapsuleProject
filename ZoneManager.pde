@@ -4,7 +4,8 @@ public class ZoneManager extends Action
 
   public int numHandsOverTotal;
   public int i;
-  
+  public int handOverIdTotal;
+
   public PVector origin = new PVector(0, 0);
 
   public int radius;
@@ -17,7 +18,7 @@ public class ZoneManager extends Action
 
   public ZoneManager(int aX, int aY, int aRadius, int aHypo)
   {
-    
+
     origin.x = aX ;
     origin.y = aY ;
     i = 0;
@@ -28,15 +29,16 @@ public class ZoneManager extends Action
     colorIsSelected = false;
     timeAtValidation = 0;
     validationTime = 2;
+    handOverIdTotal = -6;
 
     zone = new Zone[]
-    {
-    new Zone(new PVector(origin.x, origin.y-hypo+radius), radius),
-    new Zone(new PVector(origin.x, origin.y+hypo-radius), radius), 
-    new Zone(new PVector(origin.x-difx, origin.y-dify), radius), 
-    new Zone(new PVector(origin.x+difx, origin.y+dify), radius), 
-    new Zone(new PVector(origin.x+difx, origin.y-dify), radius), 
-    new Zone(new PVector(origin.x-difx, origin.y+dify), radius)
+      {
+      new Zone(0, new PVector(origin.x, origin.y-hypo+radius), radius), 
+      new Zone(1, new PVector(origin.x, origin.y+hypo-radius), radius), 
+      new Zone(2, new PVector(origin.x-difx, origin.y-dify), radius), 
+      new Zone(3, new PVector(origin.x+difx, origin.y+dify), radius), 
+      new Zone(4, new PVector(origin.x+difx, origin.y-dify), radius), 
+      new Zone(5, new PVector(origin.x-difx, origin.y+dify), radius)
     };
   }
 
@@ -49,12 +51,18 @@ public class ZoneManager extends Action
 
     for (int i=0; i<zone.length; i++)
     {
-        zone[i].draw();
-        numHandsOverTotal += zone[i].numHandsOver;
+      zone[i].draw();
+      numHandsOverTotal += zone[i].numHandsOver;
     }
 
     if (numHandsOverTotal == 2) 
     {
+
+      //for (int i=0; i<zone.length; i++)
+      //{
+      //  handOverIdTotal += zone[i].handOverId-5;
+      //}
+
       if (timeAtValidation == 0) timeAtValidation = millis()/1000.0f;
       else 
       {
@@ -67,6 +75,7 @@ public class ZoneManager extends Action
 
         if (currentTime > timeAtValidation + validationTime)
         {
+
           colorIsSelected = true;
           notifyFinished();
         }
@@ -99,7 +108,7 @@ public class ZoneManager extends Action
     notifyStarted() ;
     for (int i=0; i<zone.length; i++)
     {
-    zone[i].notifyStarted();
+      zone[i].notifyStarted();
     }
   }
 }

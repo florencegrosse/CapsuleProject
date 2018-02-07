@@ -6,6 +6,7 @@ public class ZoneRecap extends Action
   public color zoneColor;
   public int numHandsOver;
   public color targetColor;
+  PImage circle;
 
   public ZoneRecap(PVector pos, int r)
   {
@@ -14,6 +15,7 @@ public class ZoneRecap extends Action
     radius = r;
     zoneColor = color(255,0);
     numHandsOver = 0;
+    circle = loadImage("cercle_couleur.png");
   }
 
   public void draw()
@@ -22,7 +24,8 @@ public class ZoneRecap extends Action
     pushStyle();
 
     //check hand pos for zone
-
+    imageMode(CENTER);
+    image(circle, origin.x, origin.y, radius*2+5, radius*2+5);
     fill(zoneColor);
     stroke(color(200));
     strokeWeight(5);

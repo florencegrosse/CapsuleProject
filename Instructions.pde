@@ -1,19 +1,25 @@
 public class Instruction extends Screen
 {
-  ZoneGradient zoneGradient;
+  Zone zone1;
+  Zone zone2;
   
   boolean instructionsAreUnderstood;
   float timeAtValidation; //time when the 2 hands were fist inside
   float validationTime; //it take 2 seconds to validates
+  PImage circle;
+  int numHandsOverTotal;
 
   public Instruction(String id, String next, KinectManager kinect)
   {
     super(id, next, kinect);
-    zoneGradient = new ZoneGradient(new PVector(width/2, height/2), 100);
+    zone1 = new Zone(1, new PVector(width/2, height/3), 50);
+    zone2 = new Zone(2, new PVector(width/2, height/3*2), 50);
     
     instructionsAreUnderstood = false;
     timeAtValidation = 0;
     validationTime = 2;
+    circle = loadImage("cercle_couleur.png");
+    numHandsOverTotal = 0;
   }
 
   public void draw()
@@ -26,14 +32,21 @@ public class Instruction extends Screen
     fill(255);
     textAlign(CENTER);
     textFont (montserratLight);
-    text("move your hand hover the circle", 0, 30, width, 20);
+    text("move your hand over a circle \n to go on", 0, 30, width, 100);
+    
+    imageMode(CENTER);
+    image(circle, width/2, height/3, 110, 110);
+    image(circle, width/2, height/3*2, 110, 110);
 
-    zoneGradient.draw();
+    zone1.draw();
+    zone2.draw();
     
     kinect.fadeInEffect = false;
     kinect.draw();
+    
+    numHandsOverTotal = zone1.numHandsOver + zone2.numHandsOver;
 
-    if (zoneGradient.numHandsOver == 2) 
+    if (numHandsOverTotal == 2) 
     {
       if (timeAtValidation == 0) timeAtValidation = millis()/1000.0f;
       else 
@@ -41,9 +54,9 @@ public class Instruction extends Screen
         float currentTime = millis()/1000.0f;
         float validationProgression = map(currentTime-timeAtValidation, 0, validationTime, 0, 1);
         fill(100);
-        rect(zoneGradient.origin.x+zoneGradient.radius+10, zoneGradient.origin.y-zoneGradient.radius/2, 10, zoneGradient.radius);
+        rect(width/2, height/2, 10, 50);
         fill(255, 255, 0);
-        rect(zoneGradient.origin.x+zoneGradient.radius+10, zoneGradient.origin.y-zoneGradient.radius/2, 10, zoneGradient.radius*validationProgression);
+        rect(width/2, height/2, 10, 50*validationProgression);
 
         if (currentTime > timeAtValidation + validationTime)
           {
@@ -80,7 +93,8 @@ public class Instruction extends Screen
   public void run()
   {
     notifyStarted() ;
-    zoneGradient.notifyStarted() ;
+    zone1.notifyStarted() ;
+    zone2.notifyStarted() ;
   }
 
   public void show()

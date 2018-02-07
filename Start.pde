@@ -30,7 +30,7 @@ public class Start extends Screen
     personAbsentImage = loadImage("person1.png");
     personHeight = personWidth*personAbsentImage.height/personAbsentImage.width;
     timeAtValidation = 0;
-    validationTime = 1;
+    validationTime = 3;
   }
 
   public void draw()
@@ -49,17 +49,23 @@ public class Start extends Screen
     textFont(montserratLight);
     if (kinect.person2Here) //Both persons are here
     {
-      text("welcome on board", 0, 30, width, 20);
+      textFont(montserratSemiBold);
+      text("welcome on board \n person O!", width/6, 50, width/3, 100);
+      textFont(montserratSemiBold);
+      text("welcome on board \n person X!", width/2, 50, width/3, 100);
       person1 = personPresent1Image;
       person2 = personPresent2Image;
     } else if (kinect.person1Here) //Only one person is here
     {
-      text("waiting for 1 adventurer", 0, 30, width, 20);
+      textFont(montserratSemiBold);
+      text("welcome on board \n person O!", width/6, 50, width/3, 100);
+      textFont(montserratLight);
+      text("still waiting \n for one adventurer", width/2, 50, width/3, 100);
       person1 = personPresent1Image;
       person2 = personAbsentImage;
     } else //Nobody is here, so sad...
     {
-      text("waiting for 2 adventurers", 0, 30, width, 20);
+      text("waiting for 2 adventurers", 0, 50, width, 20);
       person1 = personAbsentImage;
       person2 = personAbsentImage;
     }

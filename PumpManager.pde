@@ -26,6 +26,8 @@ public class PumpManager extends Action
     if(isConnected) while (myPort.available() > 0) print((char)myPort.read());
   }
   
+  
+  
   public void draw()
   {
     if(isConnected) fill(50,240,0);
@@ -33,6 +35,17 @@ public class PumpManager extends Action
     
     ellipse(width-20,20,10,10);
   }
+  
+  //public void getPerfumeRecipe(int[] liquidAmounts){
+   
+  //  for(int i = 0;i<liquidAmounts.length;i++){
+      
+  //    sendPumpCommand(i,liquidAmounts[i]);
+      
+  //  }
+    
+    
+  //}
 
   public void sendPumpCommand(int pumpID, int ml)
   {

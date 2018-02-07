@@ -6,14 +6,24 @@ public class Zone extends Action
   public color zoneColor;
   public int numHandsOver;
   public color targetColor;
+  int transparency;
+  float fadeIn;
+  boolean fadeInEffect;
+  int id; 
+  int handOverId;
 
-  public Zone(PVector pos, int r)
+  public Zone(int _id, PVector pos, int r)
   {
 
+    id = _id;
     origin = pos;
     radius = r;
     zoneColor = color(255, 0);
     numHandsOver = 0;
+    transparency = 0;
+    fadeIn = 1.25;
+    fadeInEffect = false;
+    handOverId = -1;
   }
 
   public void draw()
@@ -22,18 +32,37 @@ public class Zone extends Action
     pushStyle();
 
     //check hand pos for zone
+    if (fadeInEffect && transparency<255) {
 
-    fill(zoneColor);
-    stroke(color(255,255,255,200));
-    strokeWeight(5);
-    ellipse(origin.x, origin.y, radius*2, radius*2);
+      transparency += fadeIn;
+
+      fill(zoneColor);
+      stroke(color(255, transparency));
+      strokeWeight(5);
+      ellipse(origin.x, origin.y, radius*2, radius*2);
+    } else {
+      fill(zoneColor);
+      stroke(color(255, 255, 255, 200));
+      strokeWeight(5);
+      ellipse(origin.x, origin.y, radius*2, radius*2);
+    }
+
 
     numHandsOver = 0;
-    if (isPointOver(kinect.person1Hand)) numHandsOver++;
-    if (isPointOver(kinect.person2Hand)) numHandsOver++;
-    targetColor = color(255, 0);;
-    if (numHandsOver == 1) targetColor = color(255,255,255,120);
-    else if (numHandsOver == 2) targetColor = color(255,255,255,120);
+    targetColor = color(255, 0);
+    if (isPointOver(kinect.person1Hand)) {
+      numHandsOver++; 
+      targetColor = color(255, 255, 255, 120);
+      //handOverId = id;
+    }
+    if (isPointOver(kinect.person2Hand)) {
+      numHandsOver++; 
+      targetColor = color(255, 255, 255, 120);
+    }
+    if (numHandsOver == 2) 
+    {
+      targetColor = color(255, 255, 255, 200);
+    }
 
     zoneColor = targetColor;
 

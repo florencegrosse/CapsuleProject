@@ -22,10 +22,11 @@ public class StickyHands extends Screen
     super.draw();
 
     pushStyle();
-    textSize(30);
+    textSize(18);
     fill(255);
     textAlign(CENTER);
-    text("Sticky Hands !", 0, height/2-20, width, 40);
+    textFont (montserratLight);
+    text("High five guys !", 0, 30, width, 20);
     
     kinect.fadeInEffect = false;
     kinect.draw();
