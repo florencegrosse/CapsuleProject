@@ -2,6 +2,7 @@ public class Action implements Runnable
 {
   String _phase = "inactive" ;
   Boolean _running = false ;
+  boolean _startMusic = true;
   
   public Action()
   {
@@ -17,6 +18,7 @@ public class Action implements Runnable
   {
     _phase = "finished" ;
     _running = false ;
+    _startMusic = true;
   }
   
   public void notifyStarted()

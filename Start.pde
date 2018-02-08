@@ -50,15 +50,15 @@ public class Start extends Screen
     if (kinect.person2Here) //Both persons are here
     {
       textFont(montserratSemiBold);
-      text("welcome on board \n person O!", width/6, 50, width/3, 100);
+      text("welcome on board \n O", width/6, 50, width/3, 100);
       textFont(montserratSemiBold);
-      text("welcome on board \n person X!", width/2, 50, width/3, 100);
+      text("welcome on board \n X", width/2, 50, width/3, 100);
       person1 = personPresent1Image;
       person2 = personPresent2Image;
     } else if (kinect.person1Here) //Only one person is here
     {
       textFont(montserratSemiBold);
-      text("welcome on board \n person O!", width/6, 50, width/3, 100);
+      text("welcome on board \n O", width/6, 50, width/3, 100);
       textFont(montserratLight);
       text("still waiting \n for one adventurer", width/2, 50, width/3, 100);
       person1 = personPresent1Image;

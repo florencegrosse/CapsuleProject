@@ -14,7 +14,7 @@ public class ZoneManager extends Action
   public float dify;
   public boolean colorIsSelected;
   public float timeAtValidation; //time when the 2 hands were fist inside
-  public float validationTime; //it take 2 seconds to validates
+  public float validationTime; //it take 2 seconds to validates  
 
   public ZoneManager(int aX, int aY, int aRadius, int aHypo)
   {
@@ -28,7 +28,7 @@ public class ZoneManager extends Action
     dify = (hypo-radius)*sin(radians(30))/sin(radians(90));
     colorIsSelected = false;
     timeAtValidation = 0;
-    validationTime = 2;
+    validationTime = 1;
     handOverIdTotal = -6;
 
     zone = new Zone[]
@@ -69,9 +69,9 @@ public class ZoneManager extends Action
         float currentTime = millis()/1000.0f;
         float validationProgression = map(currentTime-timeAtValidation, 0, validationTime, 0, 1);
         fill(100);
-        rect(width/2, height/2, 10, radius);
-        fill(255, 255, 0);
-        rect(width/2, height/2, 10, radius*validationProgression);
+        rect(width-25, 25, 10, radius);
+        fill(255, 255, 255);
+        rect(width-25, 25, 10, radius*validationProgression);
 
         if (currentTime > timeAtValidation + validationTime)
         {

@@ -6,7 +6,7 @@ public class Recap extends Screen
   public Recap(String id, PerfumeManager perfumeManager, PumpManager pump)
   {
     super(id, perfumeManager, pump);
-    zoneManager = new ZoneManagerRecap(width/2, height/2+20, 50, 200);
+    zoneManager = new ZoneManagerRecap(width/3, height/2, 60, 200);
   }
 
   public void draw()

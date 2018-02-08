@@ -11,6 +11,11 @@ ScreenManager screenManager;
 PumpManager pump;
 KinectManager kinect;
 PerfumeManager perfumeManager;
+
+public SoundFile[] musicFile;
+
+//SoundFile intro;
+
 //Movie test;
 
 //int[] stepsRatios = {1, 2, 3, 0, 1, 3};
@@ -36,17 +41,34 @@ void setup()
     new Start("start", "shoes", kinect), 
       new Shoes("shoes", "instructions"), 
       new Instruction("instructions", "activity 1", kinect), 
-      new Question("activity 1", "activity 2", kinect, pump, "Tell us with who you laugh the most.", 1, 0), 
-      new Question("activity 2", "activity 3", kinect, pump, "Share an embarrassing moment in your life.", 2, 1), 
-      new Question("activity 3", "activity 4", kinect, pump,"Create a secret handshake together!", 3, 2), 
-      new Question("activity 4", "activity 5", kinect, pump,"What are you grateful for today?", 0, 3), 
-      new Question("activity 5", "activity 6", kinect, pump,"Share the last thing you discovered about yourself?", 1, 4), 
-      new Question("activity 6", "recap", kinect, pump,"Look at the other person in the eyes for 30 seconds. \n You will hear a bell when it is over.", 3, 5), 
+      new Question("activity 1", "activity 2", kinect, pump, "Look at the other person in the eyes for 30 seconds. \n You will hear a bell when it is over.", 1, 0), 
+      new Question("activity 2", "activity 3", kinect, pump, "Tell us with who you laugh the most.", 2, 1), 
+      new Question("activity 3", "activity 4", kinect, pump, "Share an embarrassing moment in your life.", 3, 2), 
+      new Question("activity 4", "activity 5", kinect, pump, "What are you grateful for today?", 0, 3), 
+      new Question("activity 5", "activity 6", kinect, pump, "Share the last thing you discovered about yourself?", 1, 4), 
+      new Question("activity 6", "recap", kinect, pump, "Create a secret handshake together!", 3, 5), 
       //new StickyHands("activity 7", "recap", kinect), 
       new Recap("recap", perfumeManager, pump)
   };
 
   screenManager = new ScreenManager(screen);
+
+  musicFile = new SoundFile[]
+    {
+    new SoundFile(this, "Wind_mono.mp3"), 
+    new SoundFile(this, "Birds_mono.mp3"), 
+    new SoundFile(this, "Whales_mono.mp3"), 
+    new SoundFile(this, "Largevibe_mono.mp3"), 
+    new SoundFile(this, "Underwater_mono.mp3"), 
+    new SoundFile(this, "Fire_mono.mp3"), 
+    new SoundFile(this, "Neptune_mono.mp3"),
+    new SoundFile(this, "bell.mp3")
+  };
+
+  musicFile[6].amp(0.5);
+  musicFile[6].loop();
+
+  //intro = new SoundFile(this, "Intro.mp3");
 }
 
 //void sendMessage( String message )
@@ -54,9 +76,9 @@ void setup()
 //  println( message ) ;
 //}
 
-void movieEvent(Movie m) {
-  m.read();
-}
+//void movieEvent(Movie m) {
+//m.read();
+//}
 
 void draw()
 {
@@ -64,6 +86,8 @@ void draw()
   //pump.update();
   screenManager.draw();
   pump.draw();
+
+  //if(screenManager.screen[0]._startMusic) { intro.amp(0.1); intro.play(); }
   //kinect.draw();
 }
 

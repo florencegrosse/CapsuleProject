@@ -1,3 +1,5 @@
+import processing.sound.*;
+
 public class Question extends Screen
 {
   int id;
@@ -11,6 +13,9 @@ public class Question extends Screen
   int Id;
   int pumpId;
   int liquidAmount;
+  float timeAtValidation; //time when the 2 hands were fist inside
+  float validationTime; //it take 2 seconds to validates
+  boolean eyes;
   ZoneManager zoneManager;
   
   
@@ -24,6 +29,9 @@ public class Question extends Screen
     fadeIn = 1;
     fadeOut = 1;
     liquidAmount = 0;
+    timeAtValidation = 0;
+    validationTime = 45;
+    eyes = true;
     zoneManager = new ZoneManager(width/2, height/2+20, 50, 200);
   }
 
@@ -33,6 +41,28 @@ public class Question extends Screen
 
     // display label
     pushStyle();
+    
+    if (super.Id == 0 && eyes) 
+    {
+      if (timeAtValidation == 0) timeAtValidation = millis()/1000.0f;
+      else 
+      {
+        float currentTime = millis()/1000.0f;
+        float validationProgression = map(currentTime-timeAtValidation, 0, validationTime, 0, 1);
+
+        if (currentTime > timeAtValidation + validationTime)
+          {
+            musicFile[7].amp(2);
+            musicFile[7].play();
+            eyes = false;
+          }
+      }
+    } else
+    {
+      timeAtValidation = 0;
+    }
+    
+    
     textFont(montserratSemiBold);
     textSize (18);
     fill(255);
@@ -54,6 +84,7 @@ public class Question extends Screen
 
 
     if (transparency1<255) {
+      
       transparency1 += fadeIn;
       textFont(montserratSemiBold);
       fill(color(255, transparency1));
@@ -124,6 +155,7 @@ public class Question extends Screen
   {
     super.show();
     zoneManager.colorIsSelected = false;
+    eyes = true;
   }
 
   public void hide()

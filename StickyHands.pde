@@ -41,9 +41,9 @@ public class StickyHands extends Screen
         float currentTime = millis()/1000.0f;
         float validationProgression = map(currentTime-timeAtValidation, 0, validationTime, 0, 1);
         fill(100);
-        rect(width/2, height/2, 10, 100);
-        fill(255, 255, 0);
-        rect(width/2, height/2, 10, 100*validationProgression);
+        rect(width-25, 25, 10, 100);
+        fill(255, 255, 255);
+        rect(width-25, 25, 10, 100*validationProgression);
 
         if (currentTime > timeAtValidation + validationTime) 
           {

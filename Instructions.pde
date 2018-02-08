@@ -32,12 +32,15 @@ public class Instruction extends Screen
     fill(255);
     textAlign(CENTER);
     textFont (montserratLight);
-    text("move your hand over a circle \n to go on", 0, 30, width, 100);
+    text("put your hand over a circle \n to go on", 0, 30, width, 100);
     
     imageMode(CENTER);
     image(circle, width/2, height/3, 110, 110);
     image(circle, width/2, height/3*2, 110, 110);
 
+    zone1.musicPlay = false;
+    zone2.musicPlay = false;
+    
     zone1.draw();
     zone2.draw();
     
@@ -54,9 +57,9 @@ public class Instruction extends Screen
         float currentTime = millis()/1000.0f;
         float validationProgression = map(currentTime-timeAtValidation, 0, validationTime, 0, 1);
         fill(100);
-        rect(width/2, height/2, 10, 50);
-        fill(255, 255, 0);
-        rect(width/2, height/2, 10, 50*validationProgression);
+        rect(width-25, 25, 10, 50);
+        fill(255, 255, 255);
+        rect(width-25, 25, 10, 50*validationProgression);
 
         if (currentTime > timeAtValidation + validationTime)
           {

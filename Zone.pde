@@ -1,3 +1,5 @@
+import processing.sound.*;
+
 public class Zone extends Action
 {
 
@@ -6,11 +8,12 @@ public class Zone extends Action
   public color zoneColor;
   public int numHandsOver;
   public color targetColor;
-  int transparency;
-  float fadeIn;
-  boolean fadeInEffect;
-  int id; 
-  int handOverId;
+  public int transparency;
+  public float fadeIn;
+  public boolean fadeInEffect;
+  public int id; 
+  public int handOverId;
+  public boolean musicPlay;
 
   public Zone(int _id, PVector pos, int r)
   {
@@ -24,6 +27,8 @@ public class Zone extends Action
     fadeIn = 1.25;
     fadeInEffect = false;
     handOverId = -1;
+    musicPlay = true;
+    
   }
 
   public void draw()
@@ -53,15 +58,24 @@ public class Zone extends Action
     if (isPointOver(kinect.person1Hand)) {
       numHandsOver++; 
       targetColor = color(255, 255, 255, 120);
-      //handOverId = id;
-    }
+      if(musicPlay){
+      musicFile[id].amp(0.01);
+      musicFile[id].play();
+      }
+        //handOverId = id;
+    } 
     if (isPointOver(kinect.person2Hand)) {
       numHandsOver++; 
       targetColor = color(255, 255, 255, 120);
+      if(musicPlay){
+      musicFile[id].amp(0.01);
+      musicFile[id].play();
+      }
     }
     if (numHandsOver == 2) 
     {
       targetColor = color(255, 255, 255, 200);
+      
     }
 
     zoneColor = targetColor;

@@ -4,7 +4,7 @@ public class ZoneManagerRecap extends Action
 
   public int numHandsOverTotal;
   public int i;
-  
+
   public PVector origin = new PVector(0, 0);
 
   public int radius;
@@ -17,7 +17,7 @@ public class ZoneManagerRecap extends Action
 
   public ZoneManagerRecap(int aX, int aY, int aRadius, int aHypo)
   {
-    
+
     origin.x = aX ;
     origin.y = aY ;
     i = 0;
@@ -30,13 +30,13 @@ public class ZoneManagerRecap extends Action
     validationTime = 2;
 
     zone = new ZoneRecap[]
-    {
-    new ZoneRecap(new PVector(origin.x, origin.y-hypo+radius), radius),
-    new ZoneRecap(new PVector(origin.x, origin.y+hypo-radius), radius), 
-    new ZoneRecap(new PVector(origin.x-difx, origin.y-dify), radius), 
-    new ZoneRecap(new PVector(origin.x+difx, origin.y+dify), radius), 
-    new ZoneRecap(new PVector(origin.x+difx, origin.y-dify), radius), 
-    new ZoneRecap(new PVector(origin.x-difx, origin.y+dify), radius)
+      {
+      new ZoneRecap(new PVector(origin.x, origin.y-hypo+radius), radius, 0), 
+      new ZoneRecap(new PVector(origin.x, origin.y+hypo-radius), radius, 1), 
+      new ZoneRecap(new PVector(origin.x-difx, origin.y-dify), radius, 2), 
+      new ZoneRecap(new PVector(origin.x+difx, origin.y+dify), radius, 3), 
+      new ZoneRecap(new PVector(origin.x+difx, origin.y-dify), radius, 4), 
+      new ZoneRecap(new PVector(origin.x-difx, origin.y+dify), radius, 5)
     };
   }
 
@@ -49,9 +49,15 @@ public class ZoneManagerRecap extends Action
 
     for (int i=0; i<zone.length; i++)
     {
-        zone[i].draw();
-        numHandsOverTotal += zone[i].numHandsOver;
+      zone[i].draw();
+      numHandsOverTotal += zone[i].numHandsOver;
     }
+
+    textSize(8);
+    textAlign(CENTER, CENTER);
+    fill(255);
+    textFont(montserratLight);
+    text("Thanks\nfor\npaticipating!\n\nYou guys have created\na scent together.\nTake it back\nfrom the machine,\nit is yours now.", origin.x-radius, origin.y-radius*4, width, 500);
 
     if (numHandsOverTotal == 2) 
     {
@@ -61,9 +67,9 @@ public class ZoneManagerRecap extends Action
         float currentTime = millis()/1000.0f;
         float validationProgression = map(currentTime-timeAtValidation, 0, validationTime, 0, 1);
         fill(100);
-        rect(width/2, height/2, 10, radius);
-        fill(255, 255, 0);
-        rect(width/2, height/2, 10, radius*validationProgression);
+        rect(width-25, 25, 10, radius);
+        fill(255, 255, 255);
+        rect(width-25, 25, 10, radius*validationProgression);
 
         if (currentTime > timeAtValidation + validationTime)
         {
@@ -99,7 +105,7 @@ public class ZoneManagerRecap extends Action
     notifyStarted() ;
     for (int i=0; i<zone.length; i++)
     {
-    zone[i].notifyStarted();
+      zone[i].notifyStarted();
     }
   }
 }
