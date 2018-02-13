@@ -102,6 +102,7 @@ public class Question extends Screen
     for (int i=0; i<zoneManager.zone.length; i++){
     zoneManager.zone[i].fadeInEffect = true;
     }
+    
     zoneManager.draw();
     kinect.fadeInEffect = true;
     kinect.fadeIn = 1;

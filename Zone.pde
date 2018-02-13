@@ -14,6 +14,8 @@ public class Zone extends Action
   public int id; 
   public int handOverId;
   public boolean musicPlay;
+  
+  public color[] colorZone = {color(100, 80, 225, 80), color(140, 235, 235, 80), color(209, 97, 239, 80), color(230, 220, 140, 80), color(245, 145, 80, 80), color(130, 210, 175, 80)};
 
   public Zone(int _id, PVector pos, int r)
   {
@@ -46,7 +48,7 @@ public class Zone extends Action
       strokeWeight(5);
       ellipse(origin.x, origin.y, radius*2, radius*2);
     } else {
-      fill(zoneColor);
+      fill(colorZone[id]);
       stroke(color(255, 255, 255, 200));
       strokeWeight(5);
       ellipse(origin.x, origin.y, radius*2, radius*2);
@@ -59,7 +61,7 @@ public class Zone extends Action
       numHandsOver++; 
       targetColor = color(255, 255, 255, 120);
       if(musicPlay){
-      musicFile[id].amp(0.01);
+      musicFile[id].amp(0.001);
       musicFile[id].play();
       }
         //handOverId = id;
@@ -68,7 +70,7 @@ public class Zone extends Action
       numHandsOver++; 
       targetColor = color(255, 255, 255, 120);
       if(musicPlay){
-      musicFile[id].amp(0.01);
+      musicFile[id].amp(0.001);
       musicFile[id].play();
       }
     }
